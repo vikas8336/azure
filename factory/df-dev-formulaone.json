@@ -1,0 +1,9 @@
+{
+	"name": "df-dev-formulaone",
+	"location": "centralindia",
+	"identity": {
+		"type": "SystemAssigned",
+		"principalId": "f97666e0-c6a5-405d-939f-f8d1bb8295b1",
+		"tenantId": "38d472ab-4a4e-407a-896e-b94bc69bbac7"
+	}
+}
