@@ -1,0 +1,12 @@
+{
+	"name": "ls_HttpServer",
+	"properties": {
+		"annotations": [],
+		"type": "HttpServer",
+		"typeProperties": {
+			"url": "http://ergast.com/api/f1/",
+			"enableServerCertificateValidation": true,
+			"authenticationType": "Anonymous"
+		}
+	}
+}
