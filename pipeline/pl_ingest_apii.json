@@ -1,0 +1,9 @@
+{
+	"name": "pl_ingest_apii",
+	"properties": {
+		"folder": {
+			"name": "bwt_adf_formulaone_project"
+		},
+		"annotations": []
+	}
+}
