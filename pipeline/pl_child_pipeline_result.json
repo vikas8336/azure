@@ -113,7 +113,7 @@
 									"parameters": {
 										"folder_name": "result",
 										"file_name": {
-											"value": "@concat(pipeline().parameters.season_year,'_round_',item().round,'_result.json')",
+											"value": "@concat(pipeline().parameters.season_year,'_round_',item().round)",
 											"type": "Expression"
 										}
 									}
