@@ -43,22 +43,16 @@
 			{
 				"name": "ForEach_race",
 				"type": "ForEach",
-				"dependsOn": [
-					{
-						"activity": "lookup_activity_race",
-						"dependencyConditions": [
-							"Succeeded"
-						]
-					}
-				],
+				"state": "Inactive",
+				"onInactiveMarkAs": "Succeeded",
+				"dependsOn": [],
 				"userProperties": [],
 				"typeProperties": {
 					"items": {
-						"value": "@activity('lookup_activity_race').output.value[0].MRData.RaceTable.Races\r\n",
+						"value": "@activity('lookup_activity_race').output.value[0].MRData.RaceTable.Races\n",
 						"type": "Expression"
 					},
-					"isSequential": false,
-					"batchCount": 3,
+					"isSequential": true,
 					"activities": [
 						{
 							"name": "Copy_act_result",
