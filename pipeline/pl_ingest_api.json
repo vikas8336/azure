@@ -120,7 +120,8 @@
 						"value": "@activity('lookup_activity').output.value[0].MRData.SeasonTable.Seasons",
 						"type": "Expression"
 					},
-					"isSequential": true,
+					"isSequential": false,
+					"batchCount": 3,
 					"activities": [
 						{
 							"name": "Copy_race_data",
@@ -151,7 +152,8 @@
 								"sink": {
 									"type": "JsonSink",
 									"storeSettings": {
-										"type": "AzureBlobFSWriteSettings"
+										"type": "AzureBlobFSWriteSettings",
+										"copyBehavior": "MergeFiles"
 									},
 									"formatSettings": {
 										"type": "JsonWriteSettings"
