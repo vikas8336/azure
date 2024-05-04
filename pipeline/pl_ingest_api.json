@@ -5,8 +5,6 @@
 			{
 				"name": "Copy season data",
 				"type": "Copy",
-				"state": "Inactive",
-				"onInactiveMarkAs": "Succeeded",
 				"dependsOn": [],
 				"policy": {
 					"timeout": "0.12:00:00",
@@ -127,8 +125,6 @@
 							"name": "Copy_race_data",
 							"description": "this activity is used to fetch race data",
 							"type": "Copy",
-							"state": "Inactive",
-							"onInactiveMarkAs": "Succeeded",
 							"dependsOn": [],
 							"policy": {
 								"timeout": "0.12:00:00",
@@ -220,6 +216,11 @@
 				}
 			}
 		],
+		"variables": {
+			"response": {
+				"type": "String"
+			}
+		},
 		"annotations": []
 	}
 }

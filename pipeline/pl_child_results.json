@@ -134,6 +134,9 @@
 		"variables": {
 			"Season_id": {
 				"type": "String"
+			},
+			"response": {
+				"type": "String"
 			}
 		},
 		"annotations": []

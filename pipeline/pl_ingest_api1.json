@@ -232,6 +232,9 @@
 			},
 			"round_id": {
 				"type": "String"
+			},
+			"response": {
+				"type": "String"
 			}
 		},
 		"folder": {

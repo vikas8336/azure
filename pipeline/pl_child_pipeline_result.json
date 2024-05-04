@@ -54,7 +54,7 @@
 				"userProperties": [],
 				"typeProperties": {
 					"items": {
-						"value": "@activity('lookup_activity_race').output.value[0].MRData.RaceTable.Races\n",
+						"value": "@activity('lookup_activity_race').output.value[0].MRData.RaceTable.Races",
 						"type": "Expression"
 					},
 					"isSequential": true,
@@ -100,7 +100,7 @@
 									"type": "DatasetReference",
 									"parameters": {
 										"relative_url": {
-											"value": "@concat(pipeline().parameters.season_year,'/',item().round,'/result.json?limit=1000')",
+											"value": "@concat(pipeline().parameters.season_year,'/',item().round,'/results.json?limit=1000')",
 											"type": "Expression"
 										}
 									}
@@ -128,6 +128,11 @@
 			"season_year": {
 				"type": "String",
 				"defaultValue": "1950"
+			}
+		},
+		"variables": {
+			"response": {
+				"type": "String"
 			}
 		},
 		"annotations": []
