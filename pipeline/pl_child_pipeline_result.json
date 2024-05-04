@@ -57,6 +57,7 @@
 						"value": "@activity('lookup_activity_race').output.value[0].MRData.RaceTable.Races\r\n",
 						"type": "Expression"
 					},
+					"isSequential": true,
 					"activities": [
 						{
 							"name": "Copy_act_result",
