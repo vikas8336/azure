@@ -28,7 +28,8 @@
 					"sink": {
 						"type": "JsonSink",
 						"storeSettings": {
-							"type": "AzureBlobFSWriteSettings"
+							"type": "AzureBlobFSWriteSettings",
+							"copyBehavior": "MergeFiles"
 						},
 						"formatSettings": {
 							"type": "JsonWriteSettings"
@@ -41,7 +42,7 @@
 						"referenceName": "ds_source_data",
 						"type": "DatasetReference",
 						"parameters": {
-							"relative_url": "seasons"
+							"relative_url": "seasons.json?limit=100"
 						}
 					}
 				],
@@ -55,6 +56,155 @@
 						}
 					}
 				]
+			},
+			{
+				"name": "lookup_activity",
+				"description": "this activity is used to read the data",
+				"type": "Lookup",
+				"dependsOn": [
+					{
+						"activity": "Copy season data",
+						"dependencyConditions": [
+							"Succeeded"
+						]
+					}
+				],
+				"policy": {
+					"timeout": "0.12:00:00",
+					"retry": 0,
+					"retryIntervalInSeconds": 30,
+					"secureOutput": false,
+					"secureInput": false
+				},
+				"userProperties": [],
+				"typeProperties": {
+					"source": {
+						"type": "JsonSource",
+						"storeSettings": {
+							"type": "AzureBlobFSReadSettings",
+							"recursive": true,
+							"enablePartitionDiscovery": false
+						},
+						"formatSettings": {
+							"type": "JsonReadSettings"
+						}
+					},
+					"dataset": {
+						"referenceName": "ds_sink_data",
+						"type": "DatasetReference",
+						"parameters": {
+							"folder_name": "seasons",
+							"file_name": "season.json"
+						}
+					},
+					"firstRowOnly": false
+				}
+			},
+			{
+				"name": "Foreach_activity",
+				"description": "this activity iterate season data to extract season and url from it",
+				"type": "ForEach",
+				"dependsOn": [
+					{
+						"activity": "lookup_activity",
+						"dependencyConditions": [
+							"Succeeded"
+						]
+					}
+				],
+				"userProperties": [],
+				"typeProperties": {
+					"items": {
+						"value": "@activity('lookup_activity').output.value[0].MRData.SeasonTable.Seasons",
+						"type": "Expression"
+					},
+					"activities": [
+						{
+							"name": "Copy_race_data",
+							"description": "this activity is used to fetch race data",
+							"type": "Copy",
+							"dependsOn": [],
+							"policy": {
+								"timeout": "0.12:00:00",
+								"retry": 0,
+								"retryIntervalInSeconds": 30,
+								"secureOutput": false,
+								"secureInput": false
+							},
+							"userProperties": [],
+							"typeProperties": {
+								"source": {
+									"type": "JsonSource",
+									"storeSettings": {
+										"type": "HttpReadSettings",
+										"requestMethod": "GET"
+									},
+									"formatSettings": {
+										"type": "JsonReadSettings"
+									}
+								},
+								"sink": {
+									"type": "JsonSink",
+									"storeSettings": {
+										"type": "AzureBlobFSWriteSettings"
+									},
+									"formatSettings": {
+										"type": "JsonWriteSettings"
+									}
+								},
+								"enableStaging": false
+							},
+							"inputs": [
+								{
+									"referenceName": "ds_source_data",
+									"type": "DatasetReference",
+									"parameters": {
+										"relative_url": {
+											"value": "@concat(item().season,'.json?limit=100')",
+											"type": "Expression"
+										}
+									}
+								}
+							],
+							"outputs": [
+								{
+									"referenceName": "ds_sink_data",
+									"type": "DatasetReference",
+									"parameters": {
+										"folder_name": "race",
+										"file_name": {
+											"value": "@concat(item().season,'_race.json')",
+											"type": "Expression"
+										}
+									}
+								}
+							]
+						},
+						{
+							"name": "excutepipeline _result",
+							"type": "ExecutePipeline",
+							"dependsOn": [
+								{
+									"activity": "Copy_race_data",
+									"dependencyConditions": [
+										"Succeeded"
+									]
+								}
+							],
+							"policy": {
+								"secureInput": false
+							},
+							"userProperties": [],
+							"typeProperties": {
+								"pipeline": {
+									"referenceName": "pl_child_pipeline_result",
+									"type": "PipelineReference"
+								},
+								"waitOnCompletion": true
+							}
+						}
+					]
+				}
 			}
 		],
 		"annotations": []
