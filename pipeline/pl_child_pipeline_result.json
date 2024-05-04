@@ -43,9 +43,14 @@
 			{
 				"name": "ForEach_race",
 				"type": "ForEach",
-				"state": "Inactive",
-				"onInactiveMarkAs": "Succeeded",
-				"dependsOn": [],
+				"dependsOn": [
+					{
+						"activity": "lookup_activity_race",
+						"dependencyConditions": [
+							"Succeeded"
+						]
+					}
+				],
 				"userProperties": [],
 				"typeProperties": {
 					"items": {
@@ -95,7 +100,7 @@
 									"type": "DatasetReference",
 									"parameters": {
 										"relative_url": {
-											"value": "@concat(pipeline().parameters.season_year,'/',item().round,'/','result.json?limit=1000')",
+											"value": "@concat(pipeline().parameters.season_year,'/',item().round,'/result.json?limit=1000')",
 											"type": "Expression"
 										}
 									}
