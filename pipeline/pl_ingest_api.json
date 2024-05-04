@@ -204,7 +204,7 @@
 							"userProperties": [],
 							"typeProperties": {
 								"pipeline": {
-									"referenceName": "pl_child_pipeline_result",
+									"referenceName": "pl_child_results",
 									"type": "PipelineReference"
 								},
 								"waitOnCompletion": true,
