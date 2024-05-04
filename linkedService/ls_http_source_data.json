@@ -1,0 +1,13 @@
+{
+	"name": "ls_http_source_data",
+	"properties": {
+		"description": "this link service is used to get the data from formula one api",
+		"annotations": [],
+		"type": "HttpServer",
+		"typeProperties": {
+			"url": "http://ergast.com/api/f1/",
+			"enableServerCertificateValidation": true,
+			"authenticationType": "Anonymous"
+		}
+	}
+}
