@@ -39,12 +39,60 @@
 					},
 					"firstRowOnly": false
 				}
+			},
+			{
+				"name": "Copy_act_result",
+				"type": "Copy",
+				"dependsOn": [
+					{
+						"activity": "lookup_activity_race",
+						"dependencyConditions": [
+							"Succeeded"
+						]
+					}
+				],
+				"policy": {
+					"timeout": "0.12:00:00",
+					"retry": 0,
+					"retryIntervalInSeconds": 30,
+					"secureOutput": false,
+					"secureInput": false
+				},
+				"userProperties": [],
+				"typeProperties": {
+					"source": {
+						"type": "JsonSource",
+						"storeSettings": {
+							"type": "HttpReadSettings",
+							"requestMethod": "GET"
+						},
+						"formatSettings": {
+							"type": "JsonReadSettings"
+						}
+					},
+					"enableStaging": false
+				},
+				"inputs": [
+					{
+						"referenceName": "ds_source_data",
+						"type": "DatasetReference",
+						"parameters": {
+							"relative_url": {
+								"value": "@concat(pipeline().parameters.season_year,'/',pipeline().parameters.round,'/results.json?limit=1000')",
+								"type": "Expression"
+							}
+						}
+					}
+				]
 			}
 		],
 		"parameters": {
 			"season_year": {
 				"type": "String",
 				"defaultValue": "1950"
+			},
+			"round": {
+				"type": "String"
 			}
 		},
 		"annotations": []
