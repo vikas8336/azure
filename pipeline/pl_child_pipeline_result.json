@@ -41,8 +41,8 @@
 				}
 			},
 			{
-				"name": "Copy_act_result",
-				"type": "Copy",
+				"name": "ForEach_race",
+				"type": "ForEach",
 				"dependsOn": [
 					{
 						"activity": "lookup_activity_race",
@@ -51,48 +51,81 @@
 						]
 					}
 				],
-				"policy": {
-					"timeout": "0.12:00:00",
-					"retry": 0,
-					"retryIntervalInSeconds": 30,
-					"secureOutput": false,
-					"secureInput": false
-				},
 				"userProperties": [],
 				"typeProperties": {
-					"source": {
-						"type": "JsonSource",
-						"storeSettings": {
-							"type": "HttpReadSettings",
-							"requestMethod": "GET"
-						},
-						"formatSettings": {
-							"type": "JsonReadSettings"
-						}
+					"items": {
+						"value": "@activity('lookup_activity_race').output.value[0].MRData.RaceTable.Races\r\n",
+						"type": "Expression"
 					},
-					"enableStaging": false
-				},
-				"inputs": [
-					{
-						"referenceName": "ds_source_data",
-						"type": "DatasetReference",
-						"parameters": {
-							"relative_url": {
-								"value": "@concat(pipeline().parameters.season_year,'/',pipeline().parameters.round,'/results.json?limit=1000')",
-								"type": "Expression"
-							}
+					"activities": [
+						{
+							"name": "Copy_act_result",
+							"type": "Copy",
+							"dependsOn": [],
+							"policy": {
+								"timeout": "0.12:00:00",
+								"retry": 0,
+								"retryIntervalInSeconds": 30,
+								"secureOutput": false,
+								"secureInput": false
+							},
+							"userProperties": [],
+							"typeProperties": {
+								"source": {
+									"type": "JsonSource",
+									"storeSettings": {
+										"type": "HttpReadSettings",
+										"requestMethod": "GET"
+									},
+									"formatSettings": {
+										"type": "JsonReadSettings"
+									}
+								},
+								"sink": {
+									"type": "JsonSink",
+									"storeSettings": {
+										"type": "AzureBlobFSWriteSettings"
+									},
+									"formatSettings": {
+										"type": "JsonWriteSettings"
+									}
+								},
+								"enableStaging": false
+							},
+							"inputs": [
+								{
+									"referenceName": "ds_source_data",
+									"type": "DatasetReference",
+									"parameters": {
+										"relative_url": {
+											"value": "@concat(pipeline().parameters.season_year,'/',item().round,'/','result.json?limit=1000')",
+											"type": "Expression"
+										}
+									}
+								}
+							],
+							"outputs": [
+								{
+									"referenceName": "ds_sink_data",
+									"type": "DatasetReference",
+									"parameters": {
+										"folder_name": "result",
+										"file_name": {
+											"value": "@concat(pipeline().parameters.season_year,'_round_',item().round,'_result.json')",
+											"type": "Expression"
+										}
+									}
+								}
+							]
 						}
-					}
-				]
+					]
+				}
 			}
 		],
 		"parameters": {
 			"season_year": {
 				"type": "String",
 				"defaultValue": "1950"
-			},
-			"round": {
-				"type": "String"
 			}
 		},
 		"annotations": []
