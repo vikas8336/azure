@@ -120,7 +120,7 @@
 						"value": "@activity('lookup_activity').output.value[0].MRData.SeasonTable.Seasons",
 						"type": "Expression"
 					},
-					"isSequential": false,
+					"isSequential": true,
 					"activities": [
 						{
 							"name": "Copy_race_data",
