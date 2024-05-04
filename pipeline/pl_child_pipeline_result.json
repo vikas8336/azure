@@ -57,7 +57,8 @@
 						"value": "@activity('lookup_activity_race').output.value[0].MRData.RaceTable.Races\r\n",
 						"type": "Expression"
 					},
-					"isSequential": true,
+					"isSequential": false,
+					"batchCount": 3,
 					"activities": [
 						{
 							"name": "Copy_act_result",
