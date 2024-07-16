@@ -1,0 +1,9 @@
+{
+	"name": "vikasdatfactory",
+	"location": "centralindia",
+	"identity": {
+		"type": "SystemAssigned",
+		"principalId": "29bb9f3a-91ca-46b7-8780-849ea4b848dd",
+		"tenantId": "1c72c7b9-889e-4782-b904-2898298ea66a"
+	}
+}

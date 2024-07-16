@@ -1,17 +1,16 @@
 {
-	"name": "ds_sink_data",
+	"name": "ds_source",
 	"properties": {
 		"linkedServiceName": {
-			"referenceName": "ls_sink_data_adls",
+			"referenceName": "ls_blob_storage",
 			"type": "LinkedServiceReference"
 		},
 		"annotations": [],
 		"type": "Binary",
 		"typeProperties": {
 			"location": {
-				"type": "AzureBlobFSLocation",
-				"folderPath": "csvoutput",
-				"fileSystem": "copydata"
+				"type": "AzureBlobStorageLocation",
+				"container": "copydata"
 			}
 		}
 	},

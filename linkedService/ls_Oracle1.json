@@ -1,0 +1,16 @@
+{
+	"name": "ls_Oracle1",
+	"type": "Microsoft.DataFactory/factories/linkedservices",
+	"properties": {
+		"annotations": [],
+		"type": "Oracle",
+		"typeProperties": {
+			"connectionString": "host=DESKTOP-A5J1F59;port=1521;sid=XE;user id=vikas",
+			"encryptedCredential": "eyJDcmVkZW50aWFsSWQiOiJlMTgwNWZhMy1mNGNhLTRjMWMtOTMyZi1hZWY2OWJlYzQ5NTgiLCJWZXJzaW9uIjoiMi4wIiwiQ2xhc3NUeXBlIjoiTWljcm9zb2Z0LkRhdGFQcm94eS5Db3JlLkludGVyU2VydmljZURhdGFDb250cmFjdC5DcmVkZW50aWFsU1UwNkNZMTQifQ=="
+		},
+		"connectVia": {
+			"referenceName": "selfhosted-IR",
+			"type": "IntegrationRuntimeReference"
+		}
+	}
+}

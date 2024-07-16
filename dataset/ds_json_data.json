@@ -1,16 +1,24 @@
 {
-	"name": "ds_sink_data",
+	"name": "ds_json_data",
 	"properties": {
 		"linkedServiceName": {
 			"referenceName": "ls_sink_data_adls",
 			"type": "LinkedServiceReference"
+		},
+		"parameters": {
+			"outputdirectory": {
+				"type": "String"
+			}
 		},
 		"annotations": [],
 		"type": "Binary",
 		"typeProperties": {
 			"location": {
 				"type": "AzureBlobFSLocation",
-				"folderPath": "csvoutput",
+				"folderPath": {
+					"value": "@dataset().outputdirectory",
+					"type": "Expression"
+				},
 				"fileSystem": "copydata"
 			}
 		}
