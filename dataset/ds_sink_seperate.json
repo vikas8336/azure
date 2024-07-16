@@ -1,0 +1,26 @@
+{
+	"name": "ds_sink_seperate",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "ls_sink_data_adls",
+			"type": "LinkedServiceReference"
+		},
+		"parameters": {
+			"foldername": {
+				"type": "String"
+			}
+		},
+		"annotations": [],
+		"type": "Binary",
+		"typeProperties": {
+			"location": {
+				"type": "AzureBlobFSLocation",
+				"folderPath": {
+					"value": "@dataset().foldername",
+					"type": "Expression"
+				},
+				"fileSystem": "copydata"
+			}
+		}
+	}
+}

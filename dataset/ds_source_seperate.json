@@ -1,0 +1,65 @@
+{
+	"name": "ds_source_seperate",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "ds_seperate_source_data",
+			"type": "LinkedServiceReference"
+		},
+		"parameters": {
+			"filename": {
+				"type": "String"
+			}
+		},
+		"annotations": [],
+		"type": "DelimitedText",
+		"typeProperties": {
+			"location": {
+				"type": "AzureBlobStorageLocation",
+				"folderPath": "input",
+				"container": "copydata"
+			},
+			"columnDelimiter": ",",
+			"escapeChar": "\\",
+			"firstRowAsHeader": true,
+			"quoteChar": "\""
+		},
+		"schema": [
+			{
+				"name": "State_code",
+				"type": "String"
+			},
+			{
+				"name": "Table_number",
+				"type": "String"
+			},
+			{
+				"name": "Effective_date",
+				"type": "String"
+			},
+			{
+				"name": "Exp_date",
+				"type": "String"
+			},
+			{
+				"name": "Terr_code",
+				"type": "String"
+			},
+			{
+				"name": "Amount",
+				"type": "String"
+			},
+			{
+				"name": "Deductible",
+				"type": "String"
+			},
+			{
+				"name": "Symbol",
+				"type": "String"
+			},
+			{
+				"name": "Factor",
+				"type": "String"
+			}
+		]
+	}
+}

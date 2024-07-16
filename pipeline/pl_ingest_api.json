@@ -30,9 +30,6 @@
 						"storeSettings": {
 							"type": "AzureBlobFSWriteSettings",
 							"copyBehavior": "MergeFiles"
-						},
-						"formatSettings": {
-							"type": "JsonWriteSettings"
 						}
 					},
 					"enableStaging": false
@@ -49,11 +46,7 @@
 				"outputs": [
 					{
 						"referenceName": "ds_sink_data",
-						"type": "DatasetReference",
-						"parameters": {
-							"folder_name": "seasons",
-							"file_name": "season.json"
-						}
+						"type": "DatasetReference"
 					}
 				]
 			},
@@ -91,11 +84,7 @@
 					},
 					"dataset": {
 						"referenceName": "ds_sink_data",
-						"type": "DatasetReference",
-						"parameters": {
-							"folder_name": "seasons",
-							"file_name": "season.json"
-						}
+						"type": "DatasetReference"
 					},
 					"firstRowOnly": false
 				}
@@ -172,14 +161,7 @@
 							"outputs": [
 								{
 									"referenceName": "ds_sink_data",
-									"type": "DatasetReference",
-									"parameters": {
-										"folder_name": "race",
-										"file_name": {
-											"value": "@concat(item().season,'_race.json')",
-											"type": "Expression"
-										}
-									}
+									"type": "DatasetReference"
 								}
 							]
 						},
