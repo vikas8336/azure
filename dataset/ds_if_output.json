@@ -1,17 +1,24 @@
 {
-	"name": "ds_soureceseperatedata",
+	"name": "ds_if_output",
 	"properties": {
 		"linkedServiceName": {
-			"referenceName": "ls_blob_storage",
+			"referenceName": "ds_seperate_source_data",
 			"type": "LinkedServiceReference"
+		},
+		"parameters": {
+			"outputfolder": {
+				"type": "string"
+			}
 		},
 		"annotations": [],
 		"type": "Binary",
 		"typeProperties": {
 			"location": {
 				"type": "AzureBlobStorageLocation",
-				"fileName": "Data_File1.csv",
-				"folderPath": "input",
+				"folderPath": {
+					"value": "@dataset().outputfolder",
+					"type": "Expression"
+				},
 				"container": "copydata"
 			}
 		}
