@@ -10,7 +10,7 @@
 		"typeProperties": {
 			"location": {
 				"type": "AzureBlobFSLocation",
-				"fileName": "csv1.csv",
+				"fileName": "Data_File2.csv",
 				"folderPath": "postgragesql",
 				"fileSystem": "rsdata"
 			},

@@ -1,0 +1,102 @@
+{
+	"name": "pl_postgresql",
+	"properties": {
+		"activities": [
+			{
+				"name": "Copy data1",
+				"type": "Copy",
+				"dependsOn": [],
+				"policy": {
+					"timeout": "0.12:00:00",
+					"retry": 0,
+					"retryIntervalInSeconds": 30,
+					"secureOutput": false,
+					"secureInput": false
+				},
+				"userProperties": [],
+				"typeProperties": {
+					"source": {
+						"type": "DelimitedTextSource",
+						"storeSettings": {
+							"type": "AzureBlobFSReadSettings",
+							"recursive": true,
+							"enablePartitionDiscovery": false
+						},
+						"formatSettings": {
+							"type": "DelimitedTextReadSettings"
+						}
+					},
+					"sink": {
+						"type": "AzurePostgreSQLSink",
+						"writeBatchSize": 1000000,
+						"writeBatchTimeout": "00:30:00",
+						"writeMethod": "CopyCommand"
+					},
+					"enableStaging": false,
+					"translator": {
+						"type": "TabularTranslator",
+						"mappings": [
+							{
+								"source": {
+									"name": "State_code",
+									"type": "String",
+									"physicalType": "String"
+								},
+								"sink": {
+									"name": "State_code",
+									"type": "String",
+									"physicalType": "character varying"
+								}
+							},
+							{
+								"source": {
+									"name": "Table_number",
+									"type": "String",
+									"physicalType": "String"
+								},
+								"sink": {
+									"name": "Table_number",
+									"type": "String",
+									"physicalType": "character varying"
+								}
+							},
+							{
+								"source": {
+									"name": "Amount",
+									"type": "String",
+									"physicalType": "String"
+								},
+								"sink": {
+									"name": "Amount",
+									"type": "String",
+									"physicalType": "character varying"
+								}
+							}
+						],
+						"typeConversion": true,
+						"typeConversionSettings": {
+							"allowDataTruncation": true,
+							"treatBooleanAsNumber": false
+						}
+					}
+				},
+				"inputs": [
+					{
+						"referenceName": "ds_postgres",
+						"type": "DatasetReference"
+					}
+				],
+				"outputs": [
+					{
+						"referenceName": "ds_postgres_sink",
+						"type": "DatasetReference"
+					}
+				]
+			}
+		],
+		"folder": {
+			"name": "practice pipeeline"
+		},
+		"annotations": []
+	}
+}
